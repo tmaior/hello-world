@@ -55,9 +55,15 @@
       "ConstraintDescription": "",
       "Type": "String",
       "Description": "URL for the docker Image"
+    },
+	"APPNAME": {
+      "Default": "",
+      "ConstraintDescription": "",
+      "Type": "String",
+      "Description": "URL for the docker Image"
     }
   },
-  "Resources": {             
+  "Resources": {
     "HelloWorldTaskDefinition": {
       "Type": "AWS::ECS::TaskDefinition",
       "Properties": {
@@ -67,6 +73,29 @@
             "Image": {
               "Ref": "serviceDockerImageURL"
             },
+			"Environment": [
+              {
+                "Name": "SERVICE_NAME",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Ref": "APPNAME"
+                      }
+                    ]
+                  ]
+                }
+              },
+              {
+                "Name": "SERVICE_CHECK_HTTP",
+                "Value": "/"
+              },
+              {
+                "Name": "SERVICE_CHECK_INTERVAL",
+                "Value": "5s"
+              }
+            ],         
             "Essential": true,
             "PortMappings": [
               {
