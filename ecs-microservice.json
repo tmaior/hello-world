@@ -86,14 +86,6 @@
                     ]
                   ]
                 }
-              },
-              {
-                "Name": "SERVICE_CHECK_HTTP",
-                "Value": "/"
-              },
-              {
-                "Name": "SERVICE_CHECK_INTERVAL",
-                "Value": "5s"
               }
             ],         
             "Essential": true,
