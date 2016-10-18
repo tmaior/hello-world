@@ -56,7 +56,13 @@
       "Type": "String",
       "Description": "URL for the docker Image"
     },
-	"APPNAME": {
+    "APPNAME": {
+      "Default": "",
+      "ConstraintDescription": "",
+      "Type": "String",
+      "Description": "URL for the docker Image"
+    },
+    "GITBRANCH": {
       "Default": "",
       "ConstraintDescription": "",
       "Type": "String",
@@ -73,7 +79,7 @@
             "Image": {
               "Ref": "serviceDockerImageURL"
             },
-			"Environment": [
+                        "Environment": [
               {
                 "Name": "SERVICE_NAME",
                 "Value": {
@@ -86,8 +92,21 @@
                     ]
                   ]
                 }
+              },
+			  {
+                "Name": "SERVICE_TAGS",
+                "Value": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Ref": "GITBRANCH"
+                      }
+                    ]
+                  ]
+                }
               }
-            ],         
+            ],
             "Essential": true,
             "PortMappings": [
               {
@@ -119,4 +138,3 @@
     }
   }
 }
-
