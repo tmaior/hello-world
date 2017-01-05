@@ -1,0 +1,14 @@
+version: '2'
+services:
+  hello-world:
+    image: "{{ dockerhub_username }}/{{ image_name }}:{{ image_tag }}"
+    restart: always
+    ports:
+      - 80
+    labels:
+      - 'com.docker.swarm.reschedule-policies=["on-node-failure"]'
+# Specify the default network for all services to be the pre-existing network with name network_name
+networks:
+  default:
+    external:
+      name: "{{ network_name }}"
